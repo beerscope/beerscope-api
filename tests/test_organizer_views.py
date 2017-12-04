@@ -1,9 +1,8 @@
 import json
+from beerscope import models
 
 
 def test_add_keg(client):
-    from beerscope import models
-
     assert models.Keg.query.count() == 0
     beer_description = 'Some awesome beer'
     response = client.post(
