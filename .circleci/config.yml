@@ -68,7 +68,7 @@ jobs:
           command: |
             . venv/bin/activate
             pip install bandit
-            bandit
+            bandit --exclude=venv --recursive .
 
       - store_artifacts:
           path: test-reports
