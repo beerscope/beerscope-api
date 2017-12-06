@@ -54,6 +54,14 @@ jobs:
             . venv/bin/activate
             codecov
 
+      # check code style
+      - run:
+          name: flake8
+          command: |
+            . venv/bin/activate
+            pip install flake8
+            flake8
+
       - store_artifacts:
           path: test-reports
           destination: test-reports
