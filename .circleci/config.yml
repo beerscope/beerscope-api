@@ -33,7 +33,7 @@ jobs:
             python3 -m venv venv
             . venv/bin/activate
             pip install -r requirements.txt
-            pip install codecov
+            pip install codecov flake8 bandit
 
       - save_cache:
           paths:
@@ -53,6 +53,20 @@ jobs:
           command: |
             . venv/bin/activate
             codecov
+
+      # check code style
+      - run:
+          name: flake8
+          command: |
+            . venv/bin/activate
+            flake8 --exclude=venv/
+
+      # check security
+      - run:
+          name: bandit
+          command: |
+            . venv/bin/activate
+            bandit --exclude=venv/,tests/ --recursive .
 
       - store_artifacts:
           path: test-reports
